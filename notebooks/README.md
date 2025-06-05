@@ -51,6 +51,16 @@ For each stock dataset:
   These indicators help analyze price trends and momentum for further financial analysis.
 - **Visualization of Technical Indicators:** Visualized the close price with SMA overlays, RSI, and MACD using matplotlib to better understand the impact of these indicators on stock price trends.
 
+---
+
+### Major Works in `comparison.ipynb`
+
+- **Date Alignment:** Loaded and aligned news and stock price data by date, normalizing timestamps for accurate comparison.
+- **Sentiment Analysis:** Used TextBlob to quantify the sentiment (positive, negative, neutral) of news headlines, and aggregated daily sentiment scores.
+- **Daily Stock Returns:** Computed daily percentage changes in closing prices to represent stock movements.
+- **Correlation Analysis:** Merged daily sentiment and stock returns, calculated the correlation coefficient, and visualized the correlation using a heatmap.
+- **Visualization:** Plotted daily sentiment and stock returns over time to visually assess their relationship.
+
 ## 🛠️ TA-Lib Installation (Windows - `.venv`)
 
 This project uses **TA-Lib**, a library for technical analysis. Due to its native C dependencies, installation on Windows requires some extra steps.
