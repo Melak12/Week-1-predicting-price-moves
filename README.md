@@ -26,3 +26,13 @@ stock: Stock ticker symbol (unique series of letters assigned to a publicly trad
 
 Note: if requirements.txt is missing, you might need to run this command
 `pip freeze > requirements.txt`
+
+## Notebooks Overview
+
+The `notebooks/` directory contains detailed exploratory data analysis (EDA) and correlation analysis for both news and stock price data:
+
+- **analyst_eda.ipynb**: EDA on news headlines, including headline length, publisher analysis, keyword extraction, time series analysis, and email domain extraction.
+- **TSLA_eda.ipynb, AAPL_eda.ipynb, AMZN_eda.ipynb, GOOG_eda.ipynb, META_eda.ipynb, MSFT_eda.ipynb, NVDA_eda.ipynb**: For each stock, these notebooks load historical price data, report summary statistics and missing values, compute technical indicators (SMA, RSI, MACD) using TA-Lib, and visualize the results.
+- **comparison.ipynb**: Aligns news and stock data by date, performs sentiment analysis on headlines, calculates daily stock returns, and analyzes the correlation between news sentiment and stock price movements. Includes both time series and heatmap visualizations of the correlation.
+
+See the `notebooks/README.md` for more details on each notebook's workflow and outputs.
