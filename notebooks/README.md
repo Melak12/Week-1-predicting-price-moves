@@ -37,6 +37,20 @@ The structure of the data is as follows:
   These indicators help analyze TSLA price trends and momentum for further financial analysis.
 - **Visualization of Technical Indicators:** Visualized the TSLA close price with SMA overlays, RSI, and MACD using matplotlib to better understand the impact of these indicators on stock price trends.
 
+---
+
+### Major Works in `AAPL_eda.ipynb`, `AMZN_eda.ipynb`, `GOOG_eda.ipynb`, `META_eda.ipynb`, `MSFT_eda.ipynb`, `NVDA_eda.ipynb`, and `TSLA_eda.ipynb`
+
+For each stock dataset:
+
+- **Summary Statistics & Missing Value Report:** Loaded historical data, displayed summary statistics for numeric columns, reported missing values, and listed columns with >5% nulls.
+- **Technical Analysis Indicators:** Applied TA-Lib to calculate and add:
+  - 20-day and 50-day Simple Moving Averages (SMA)
+  - 14-day Relative Strength Index (RSI)
+  - MACD (Moving Average Convergence Divergence) and its signal/histogram
+  These indicators help analyze price trends and momentum for further financial analysis.
+- **Visualization of Technical Indicators:** Visualized the close price with SMA overlays, RSI, and MACD using matplotlib to better understand the impact of these indicators on stock price trends.
+
 ## 🛠️ TA-Lib Installation (Windows - `.venv`)
 
 This project uses **TA-Lib**, a library for technical analysis. Due to its native C dependencies, installation on Windows requires some extra steps.
