@@ -24,3 +24,53 @@ The structure of the data is as follows:
 - **Time Series Analysis:** Highlighted spikes in publication frequency and annotated major market events.
 - **Hourly Publication Analysis:** Analyzed distribution of article publications by hour of day (if time data available).
 - **Publisher Email Domain Extraction:** Identified publisher names formatted as email addresses and summarized top domains.
+
+---
+
+### Major Works in `TSLA_eda.ipynb`
+
+- **Summary Statistics & Missing Value Report:** Loaded TSLA historical data, displayed summary statistics for numeric columns, reported missing values, and listed columns with >5% nulls.
+- **Technical Analysis Indicators:** Applied TA-Lib to calculate and add:
+  - 20-day and 50-day Simple Moving Averages (SMA)
+  - 14-day Relative Strength Index (RSI)
+  - MACD (Moving Average Convergence Divergence) and its signal/histogram
+  These indicators help analyze TSLA price trends and momentum for further financial analysis.
+
+## 🛠️ TA-Lib Installation (Windows - `.venv`)
+
+This project uses **TA-Lib**, a library for technical analysis. Due to its native C dependencies, installation on Windows requires some extra steps.
+
+
+### ✅ Step 1: Create and Activate Virtual Environment
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### ✅ Step 2: (Optional) Register the Environment for Jupyter Notebooks
+
+If you're working with `.ipynb` files:
+
+```bash
+pip install ipykernel
+python -m ipykernel install --user --name=.venv --display-name "Python (.venv)"
+```
+
+### ✅ Step 3:  Install Project Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+
+### ✅ Step 4: Install TA-Lib Binary for Windows
+
+TA-Lib requires a compiled binary on Windows. Since it's not available as a standard `pip` install from PyPI for Windows, follow these steps:
+
+1. Download the appropriate `.whl` (wheel) file for your Python version and system architecture from this unofficial sour
+
+### ✅ Step 5:  Verify the Installation
+```bash
+import talib
+print(talib.__version__)
+```
+
