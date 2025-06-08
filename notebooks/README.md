@@ -1,9 +1,9 @@
 ## Data Profiling, Cleaning & EDA Process
 
-The following steps were performed for each country dataset as documented in the Jupyter notebooks in the `notebooks/` directory:
+The following steps were performed for each stock dataset as documented in the Jupyter notebooks in the `notebooks/` directory:
 
 ### Financial News and Stock Price Integration Dataset
-FNSPID (Financial News and Stock Price Integration Dataset), is a comprehensive financial dataset designed to enhance stock market predictions by combining quantitative and qualitative data.
+FNSPID (Financial News and Stock Price Integration Dataset) is a comprehensive financial dataset designed to enhance stock market predictions by combining quantitative and qualitative data.
 
 The structure of the data is as follows:
 
@@ -15,41 +15,36 @@ The structure of the data is as follows:
 
 ---
 
-### Major Works in `analyst_eda.ipynb`
-
-- **Headline Length Analysis:** Computed descriptive statistics for headline lengths.
-- **Publisher Analysis:** Counted articles per publisher, identified top publishers, and analyzed common keywords for each.
-- **Publication Date Analysis:** Converted date columns, extracted day and weekday, and visualized article publication trends over time and by weekday.
-- **Keyword and Phrase Extraction:** Used NLP techniques to identify the most common keywords and bigrams in headlines.
-- **Time Series Analysis:** Highlighted spikes in publication frequency and annotated major market events.
-- **Hourly Publication Analysis:** Analyzed distribution of article publications by hour of day (if time data available).
-- **Publisher Email Domain Extraction:** Identified publisher names formatted as email addresses and summarized top domains.
-
----
-
-### Major Works in `TSLA_eda.ipynb`
-
-- **Summary Statistics & Missing Value Report:** Loaded TSLA historical data, displayed summary statistics for numeric columns, reported missing values, and listed columns with >5% nulls.
-- **Technical Analysis Indicators:** Applied TA-Lib to calculate and add:
-  - 20-day and 50-day Simple Moving Averages (SMA)
-  - 14-day Relative Strength Index (RSI)
-  - MACD (Moving Average Convergence Divergence) and its signal/histogram
-  These indicators help analyze TSLA price trends and momentum for further financial analysis.
-- **Visualization of Technical Indicators:** Visualized the TSLA close price with SMA overlays, RSI, and MACD using matplotlib to better understand the impact of these indicators on stock price trends.
-
----
 
 ### Major Works in `AAPL_eda.ipynb`, `AMZN_eda.ipynb`, `GOOG_eda.ipynb`, `META_eda.ipynb`, `MSFT_eda.ipynb`, `NVDA_eda.ipynb`, and `TSLA_eda.ipynb`
 
-For each stock dataset:
+For each stock dataset, the following standardized workflow was implemented:
 
-- **Summary Statistics & Missing Value Report:** Loaded historical data, displayed summary statistics for numeric columns, reported missing values, and listed columns with >5% nulls.
-- **Technical Analysis Indicators:** Applied TA-Lib to calculate and add:
-  - 20-day and 50-day Simple Moving Averages (SMA)
-  - 14-day Relative Strength Index (RSI)
-  - MACD (Moving Average Convergence Divergence) and its signal/histogram
-  These indicators help analyze price trends and momentum for further financial analysis.
-- **Visualization of Technical Indicators:** Visualized the close price with SMA overlays, RSI, and MACD using matplotlib to better understand the impact of these indicators on stock price trends.
+- **Data Loading & Inspection:**
+  - Loaded historical stock data using a unified utility function for each ticker (AAPL, AMZN, GOOG, META, MSFT, NVDA, TSLA).
+  - Displayed the first few rows, checked the shape, and reported missing values for each dataset.
+
+- **Datetime Handling:**
+  - Converted the 'Date' column to datetime format and set it as the DataFrame index for time series analysis.
+
+- **Stock Price Visualization:**
+  - Plotted the time series of Close, Open, High, and Low prices.
+  - Displayed candlestick charts for each stock using mplfinance.
+
+- **Trend & Distribution Analysis:**
+  - Analyzed and printed the frequency of up, down, and no-change trends in stock price movements.
+  - Visualized the distribution of closing prices for each stock.
+
+- **Technical Analysis Indicators:**
+  - Applied TA-Lib to calculate and add:
+    - 20-day and 50-day Simple Moving Averages (SMA)
+    - 14-day Relative Strength Index (RSI)
+    - MACD (Moving Average Convergence Divergence) and its signal/histogram
+    - Daily returns, rolling volatility, cumulative returns, Bollinger Bands, and ATR
+  - These indicators help analyze price trends, momentum, and volatility for further financial analysis.
+
+- **Visualization of Technical Indicators:**
+  - Visualized the close price with SMA overlays, RSI, and MACD using matplotlib for a specified date range (e.g., 2022).
 
 ---
 
@@ -91,7 +86,7 @@ pip install -r requirements.txt
 
 TA-Lib requires a compiled binary on Windows. Since it's not available as a standard `pip` install from PyPI for Windows, follow these steps:
 
-1. Download the appropriate `.whl` (wheel) file for your Python version and system architecture from this unofficial sour
+1. Download the appropriate `.whl` (wheel) file for your Python version and system architecture from this unofficial source.
 
 ### ✅ Step 5:  Verify the Installation
 ```bash
