@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import talib
 import mplfinance as mpf
+from scripts.utils import get_stock_name
 
 ## This script performs financial analysis based on the data provided in a DataFrame which is loaded from ../data/yfinance_data/<STOCKPREFIX>_historical_data.csv. Here is the mapping of the STOCKPREFIX to the stock name:
 # STOCKPREFIX = {
@@ -18,20 +19,7 @@ class FinancialDataAnalyzer:
     def __init__(self, df, stock_prefix):
         self.df = df
         self.stock_prefix = stock_prefix
-        self.stock_name = self.get_stock_name()
-    
-    def get_stock_name(self):
-        # Mapping of stock prefixes to stock names
-        stock_prefix_mapping = {
-            "AAPL": "Apple",
-            "MSFT": "Microsoft",
-            "GOOGL": "Google",
-            "AMZN": "Amazon",
-            "TSLA": "Tesla",
-            "META": "Meta",
-            "NVDA": "NVIDIA",
-        }
-        return stock_prefix_mapping.get(self.stock_prefix, "Unknown Stock")
+        self.stock_name = get_stock_name(self.stock_prefix)
 
     def change_to_datetime(self):
         # Convert the 'Date' column to datetime format
