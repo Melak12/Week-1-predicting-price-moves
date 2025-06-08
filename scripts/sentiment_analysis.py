@@ -7,6 +7,8 @@ import seaborn as sns
 import re
 from collections import Counter
 
+## This script performs sentiment analysis and data analysis on article headlines based on the data provided in a DataFrame which is loaded from ../data/raw_analysis_data.csv.
+
 
 # Download NLTK resources if not already present
 print("Downloading NLTK resources...")
