@@ -48,13 +48,6 @@ For each stock dataset, the following standardized workflow was implemented:
 
 ---
 
-### Major Works in `comparison.ipynb`
-
-- **Date Alignment:** Loaded and aligned news and stock price data by date, normalizing timestamps for accurate comparison.
-- **Sentiment Analysis:** Used TextBlob to quantify the sentiment (positive, negative, neutral) of news headlines, and aggregated daily sentiment scores.
-- **Daily Stock Returns:** Computed daily percentage changes in closing prices to represent stock movements.
-- **Correlation Analysis:** Merged daily sentiment and stock returns, calculated the correlation coefficient, and visualized the correlation using a heatmap.
-- **Visualization:** Plotted daily sentiment and stock returns over time to visually assess their relationship.
 
 ## 🛠️ TA-Lib Installation (Windows - `.venv`)
 
@@ -93,4 +86,22 @@ TA-Lib requires a compiled binary on Windows. Since it's not available as a stan
 import talib
 print(talib.__version__)
 ```
+
+---
+
+### Correlation Analysis in `correlation_TSLA_eda.ipynb`
+
+The notebook `correlation_TSLA_eda.ipynb` demonstrates a complete workflow for analyzing the relationship between news sentiment and TSLA stock price movements. The process leverages the `CorrelationAnalyzer` class from `scripts/correlation_analysis.py` and includes the following steps:
+
+- **Data Loading**: Loads TSLA historical stock price data and news data (headlines, publishers, publication dates).
+- **Date Alignment**: Aligns news and stock data by date, robustly handling various date formats and missing values.
+- **Sentiment Analysis**: Uses TextBlob to compute sentiment polarity scores for each news headline.
+- **Sentiment Aggregation**: Aggregates multiple news articles per day to compute the average daily sentiment score.
+- **Stock Return Calculation**: Calculates daily percentage returns from TSLA closing prices.
+- **Correlation Analysis**: Merges daily sentiment scores with daily returns and computes the Pearson correlation coefficient to assess the relationship between news sentiment and stock price movement.
+- **Visualization**: Visualizes the relationship between daily sentiment and daily returns using a scatter plot.
+
+This workflow is modular and generalizable to other stocks and news datasets by changing the stock prefix and input files. The notebook is intended for exploratory data analysis and research on the impact of news sentiment on stock price movements.
+
+---
 
