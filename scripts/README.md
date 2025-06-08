@@ -78,3 +78,34 @@ The `financial_analysis.py` script provides a set of tools for performing techni
 This script is designed to be imported and used within Jupyter notebooks or other Python scripts for financial EDA, technical analysis, and stock price research. See the EDA notebooks for example usage and integration with other analysis workflows.
 
 ---
+
+# Correlation Analysis Script Documentation
+
+The `correlation_analysis.py` script provides tools for analyzing the relationship between news sentiment and stock price movements. It is designed to align news and stock data by date, perform sentiment analysis on news headlines, compute daily stock returns, and statistically test the correlation between sentiment and returns.
+
+## Key Features
+
+- **Date Alignment**: Robustly aligns news and stock data by date, handling various date formats and missing values.
+- **Sentiment Analysis**: Uses TextBlob to compute sentiment polarity scores for news headlines, with support for custom headline columns.
+- **Sentiment Aggregation**: Aggregates multiple news articles per day to compute average daily sentiment scores.
+- **Stock Return Calculation**: Computes daily percentage returns from closing prices.
+- **Correlation Analysis**: Calculates the Pearson correlation coefficient between average daily sentiment and daily stock returns, providing statistical insight into their relationship.
+- **Visualization**: Includes scatter plot visualization of sentiment scores versus daily returns.
+- **Flexible Integration**: Designed for use in Jupyter notebooks and Python scripts, with a workflow that can be run step-by-step or as a full analysis pipeline.
+
+## Notable Methods
+
+- `__init__`: Initialize the CorrelationAnalyzer with news and stock DataFrames and a stock prefix.
+- `convert_date_to_datetime`: Robustly convert and normalize date columns in both DataFrames, handling mixed formats and missing values.
+- `align_by_date`: Align and sort both DataFrames by date, preparing them for analysis.
+- `analyze_sentiment`: Compute sentiment polarity scores for news headlines using TextBlob.
+- `calculate_daily_returns`: Compute daily percentage returns for stock closing prices.
+- `merge_and_correlate`: Aggregate daily sentiment, merge with stock returns, and compute the Pearson correlation coefficient.
+- `plot_correlation`: Visualize the relationship between sentiment and returns with a scatter plot.
+- `run_full_analysis`: Run the entire workflow from alignment to correlation and visualization.
+
+## Usage
+
+This script is intended for exploratory data analysis (EDA) and research on the impact of news sentiment on stock price movements. It is suitable for use in Jupyter notebooks and can be integrated with other analysis scripts. See the EDA notebooks for example usage and workflow integration.
+
+---

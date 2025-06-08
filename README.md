@@ -51,7 +51,7 @@ notebooks/
     __init__.py
     AAPL_eda.ipynb
     AMZN_eda.ipynb
-    comparison.ipynb
+    correlation_TSLA_eda.ipynb
     GOOG_eda.ipynb
     META_eda.ipynb
     MSFT_eda.ipynb
@@ -61,6 +61,7 @@ notebooks/
     TSLA_eda.ipynb
 scripts/
     __init__.py
+    correlation_analysis.py
     financial_analysis.py
     README.md
     sentiment_analysis.py
