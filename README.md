@@ -27,6 +27,49 @@ stock: Stock ticker symbol (unique series of letters assigned to a publicly trad
 Note: if requirements.txt is missing, you might need to run this command
 `pip freeze > requirements.txt`
 
+## Project Structure
+
+The repository is organized as follows:
+
+```
+README.md
+requirements.txt
+app/
+    __init__.py
+
+data/
+    raw_analyst_ratings.csv
+    yfinance_data/
+        AAPL_historical_data.csv
+        AMZN_historical_data.csv
+        GOOG_historical_data.csv
+        META_historical_data.csv
+        MSFT_historical_data.csv
+        NVDA_historical_data.csv
+        TSLA_historical_data.csv
+notebooks/
+    __init__.py
+    AAPL_eda.ipynb
+    AMZN_eda.ipynb
+    comparison.ipynb
+    GOOG_eda.ipynb
+    META_eda.ipynb
+    MSFT_eda.ipynb
+    news_sentiment_eda.ipynb
+    NVDA_eda.ipynb
+    README.md
+    TSLA_eda.ipynb
+scripts/
+    __init__.py
+    financial_analysis.py
+    README.md
+    sentiment_analysis.py
+    utils.py
+tests/
+    __init__.py
+    test_analyst_eda.py
+```
+
 ## Notebooks Overview
 
 The `notebooks/` directory contains detailed exploratory data analysis (EDA) and correlation analysis for both news and stock price data:
