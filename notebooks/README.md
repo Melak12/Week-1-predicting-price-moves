@@ -15,29 +15,6 @@ The structure of the data is as follows:
 
 ---
 
-### Major Works in `analyst_eda.ipynb`
-
-- **Headline Length Analysis:** Computed descriptive statistics for headline lengths.
-- **Publisher Analysis:** Counted articles per publisher, identified top publishers, and analyzed common keywords for each.
-- **Publication Date Analysis:** Converted date columns, extracted day and weekday, and visualized article publication trends over time and by weekday.
-- **Keyword and Phrase Extraction:** Used NLP techniques to identify the most common keywords and bigrams in headlines.
-- **Time Series Analysis:** Highlighted spikes in publication frequency and annotated major market events.
-- **Hourly Publication Analysis:** Analyzed distribution of article publications by hour of day (if time data available).
-- **Publisher Email Domain Extraction:** Identified publisher names formatted as email addresses and summarized top domains.
-
----
-
-### Major Works in `TSLA_eda.ipynb`
-
-- **Summary Statistics & Missing Value Report:** Loaded TSLA historical data, displayed summary statistics for numeric columns, reported missing values, and listed columns with >5% nulls.
-- **Technical Analysis Indicators:** Applied TA-Lib to calculate and add:
-  - 20-day and 50-day Simple Moving Averages (SMA)
-  - 14-day Relative Strength Index (RSI)
-  - MACD (Moving Average Convergence Divergence) and its signal/histogram
-  These indicators help analyze TSLA price trends and momentum for further financial analysis.
-- **Visualization of Technical Indicators:** Visualized the TSLA close price with SMA overlays, RSI, and MACD using matplotlib to better understand the impact of these indicators on stock price trends.
-
----
 
 ### Major Works in `AAPL_eda.ipynb`, `AMZN_eda.ipynb`, `GOOG_eda.ipynb`, `META_eda.ipynb`, `MSFT_eda.ipynb`, `NVDA_eda.ipynb`, and `TSLA_eda.ipynb`
 
