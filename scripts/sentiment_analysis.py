@@ -1,11 +1,14 @@
 import nltk
 from nltk.corpus import stopwords
 from nltk import word_tokenize, ngrams, FreqDist
+from nltk.sentiment import SentimentIntensityAnalyzer
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import re
 from collections import Counter
+
+## This script performs sentiment analysis and data analysis on article headlines based on the data provided in a DataFrame which is loaded from ../data/raw_analysis_data.csv.
 
 
 # Download NLTK resources if not already present
@@ -90,19 +93,47 @@ class ArticleDataAnalyzer:
         print("\nMost common bigrams (phrases):")
         for phrase, count in bigram_fdist.most_common(20):
             print(' '.join(phrase), ":", count)
-    
-    def analyze_sentiment(self):
+
+
+    def sentiment_analysis(self):
+        """
+        Perform sentiment analysis on headlines using NLTK's VADER SentimentIntensityAnalyzer.
+        Adds 'sentiment_score' and 'sentiment_class' columns to the DataFrame.
+        """
+
         # Ensure VADER sentiment analyzer is available
-        from nltk.sentiment import SentimentIntensityAnalyzer
+        try:
+            nltk.data.find('sentiment/vader_lexicon.zip')
+        except LookupError:
+            print("Downloading vader_lexicon...")
+            nltk.download('vader_lexicon', quiet=True)
+
         sia = SentimentIntensityAnalyzer()
+        headlines = self.df['headline'].fillna("").astype(str).tolist()
+        # Use list comprehension for speed
+        sentiment_scores = [sia.polarity_scores(headline) for headline in headlines]
+        self.df['sentiment_score'] = [score['compound'] for score in sentiment_scores]
+        self.df['compound'] = self.df['sentiment_score']  # For compatibility
+        self.df['sentiment_class'] = self.df['sentiment_score'].apply(self.sentiment_class)
+        print("Sentiment analysis complete. Columns 'sentiment_score', 'compound' and 'sentiment_class' added.")
 
-        # Analyze sentiment of each headline
-        self.df['sentiment'] = self.df['headline'].apply(lambda x: sia.polarity_scores(str(x)) if pd.notnull(x) else None)
-
-        # Extract compound score for overall sentiment
-        self.df['compound'] = self.df['sentiment'].apply(lambda x: x['compound'] if x else None)
-
-        print("Sentiment analysis completed. Compound scores added to DataFrame.")
+    @staticmethod
+    def sentiment_class(score, pos_th=0.2, neg_th=-0.2):
+        """
+        Classify sentiment score into 'positive', 'neutral', or 'negative'.
+        Args:
+            score (float): Sentiment polarity score (typically -1 to 1)
+            pos_th (float): Threshold above which sentiment is positive
+            neg_th (float): Threshold below which sentiment is negative
+        Returns:
+            str: Sentiment class label
+        """
+        if score >= pos_th:
+            return 'positive'
+        elif score <= neg_th:
+            return 'negative'
+        else:
+            return 'neutral'
 
     def analyze_articles_by_weekday(self):
         # Count and visualize articles published by weekday
@@ -320,3 +351,40 @@ class ArticleDataAnalyzer:
         domain_counts = pd.Series(domains).value_counts()
         print("\nTop email domains among publishers:")
         print(domain_counts.head(10))
+
+    def visualize_sentiment_score_by_top_publishers(self, top_n=10):
+        """
+        Visualize the average sentiment (using 'compound') and sentiment class distribution for the top publishers.
+        Handles missing sentiment classes robustly and removes redundant imports.
+        """
+        if 'publisher' not in self.df.columns or 'compound' not in self.df.columns or 'sentiment_class' not in self.df.columns:
+            print("Required columns ('publisher', 'compound', 'sentiment_class') not found in DataFrame.")
+            return
+        # Get top publishers by article count
+        top_publishers = self.df['publisher'].value_counts().head(top_n).index
+        df_top = self.df[self.df['publisher'].isin(top_publishers)]
+        # Average compound sentiment per publisher
+        avg_sentiment = df_top.groupby('publisher')['compound'].mean().loc[top_publishers]
+        plt.figure(figsize=(12, 5))
+        sns.barplot(x=avg_sentiment.index, y=avg_sentiment.values, palette='coolwarm')
+        plt.title(f'Average Compound Sentiment by Top {top_n} Publishers')
+        plt.xlabel('Publisher')
+        plt.ylabel('Average Compound Sentiment')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()
+        # Sentiment class distribution per publisher (robust to missing classes)
+        sentiment_dist = df_top.groupby(['publisher', 'sentiment_class']).size().unstack(fill_value=0).loc[top_publishers]
+        # Ensure all sentiment classes are present
+        for col in ['positive', 'neutral', 'negative']:
+            if col not in sentiment_dist.columns:
+                sentiment_dist[col] = 0
+        sentiment_dist = sentiment_dist[['positive', 'neutral', 'negative']]
+        sentiment_dist.plot(kind='bar', stacked=True, figsize=(12, 6), colormap='Set2')
+        plt.title(f'Sentiment Class Distribution by Top {top_n} Publishers')
+        plt.xlabel('Publisher')
+        plt.ylabel('Number of Articles')
+        plt.xticks(rotation=45)
+        plt.legend(title='Sentiment Class')
+        plt.tight_layout()
+        plt.show()
